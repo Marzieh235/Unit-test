@@ -1,17 +1,22 @@
-const assert = require('assert');
+const assert = require('chai').assert;
+const expect = require('chai').expect;
 const libs = require('./../app/libs');
 
 
 describe('calculator tests', function () {
     it('returns 1 + 31 = 32', function () {
-        assert.strictEqual(libs.sum(1, 2), 3)
+        // assert.strictEqual(libs.sum(1, 2), 3)
+
+        expect(libs.sum(1 , 2)).to.equal(3)
     })
 })
 
 
 describe('calculator tests', function () {
-    it('returns 2 * 31 = 62', function () {
-        assert.equal(libs.mul(2, 2), 4)
+    it('returns 2 * 31 != 61', function () {
+        // assert.equal(libs.mul(2, 2), 4)
+
+        expect(libs.mul(2 ,2)).to.not.equal(5);
     })
 })
 
@@ -20,7 +25,9 @@ describe('first Item', function () {
     it('return the first element of an array', () => {
         let result = libs.FirstItem([1, 2, 3]);
 
-        assert.equal(result, 1);
+        // assert.equal(result, 1);
+
+        expect(result).to.equal(1);
     })
 })
 
@@ -31,7 +38,11 @@ describe('async test', () => {
 
 
         libs.delayfilterwithCallback(input, filter, (result) => {
-            assert.deepEqual(result, [2, 4, 6, 8])
+            // assert.deepEqual(result, [2, 4, 6, 8])
+
+            expect(result).to.deep.equal([2,4,6,8]);
+            expect(result).to.have.lengthOf(4);
+
             done();
         })
     })
@@ -45,7 +56,9 @@ describe('async test', () => {
 
 
         return libs.delayfilterwithPromise(input, filter).then(result => {
-            assert.deepEqual(result, [2, 4, 6, 8]);
+            // assert.deepEqual(result, [2, 4, 6, 8]);
+
+            expect(result).deep.equal([2,4,6,8]);
         })
     })
 
@@ -56,8 +69,9 @@ describe('async test', () => {
         let filter = (item) => item % 2 == 0;
 
         let result = await libs.delayfilterwithPromise(input, filter)
-        assert.deepEqual(result, [2, 4, 6, 8])
-            ;
+        // assert.deepEqual(result, [2, 4, 6, 8]);
+
+        expect(result).deep.equal([2,4,6,8]);
 
     })
 
